@@ -1,4 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:lotoapp/widgets/lotomania_widget.dart';
+import 'package:lotoapp/widgets/main_menu_widget.dart';
+import 'package:lotoapp/widgets/quina_wiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,8 +14,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int nextNumber({required int max, required int min}) =>
+        min + Random().nextInt(max - min + 1);
+
+    final number = nextNumber(max: 20, min: 10);
+    // min + Random().nextInt(max - min + 1);
+    print(number);
+
+    // List<int> nextNumbers(int length, {required int min, required int max}) =>
+    //     Random().nextInt(max - min);
+
+    //final list = List<int>.generate(10,(_)=> nextNumbers(10, max: 20, min: 5));
+
+    //  print(list);
+
+    final numbers = Set<int>();
+
+    // while (numbers.length < length) {
+    //  final numbers = nextNumber(max: max, min: min);
+
+    //  numbers.add(numbers);
+    //   }
+    //  return numbers;
+
     return MaterialApp(
-      home: LotoApp(),
+      routes: {
+        // '/': (context) => LotoApp(),
+
+        '/tela2': (context) => const QuinaWidget()
+      },
+      home: const LotoApp(),
     );
   }
 }
@@ -21,46 +54,15 @@ class LotoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 13, 228, 24),
+      backgroundColor: const Color.fromARGB(255, 13, 228, 24),
       appBar: AppBar(
         title: Text(
           'Palpite Certo',
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 13, 228, 24),
+        backgroundColor: const Color.fromARGB(255, 13, 228, 24),
       ),
-      body: BolasEscolhidas(),
+      body: const MainMenuWidget(),
     );
   }
 }
-
-class BolasEscolhidas extends StatefulWidget {
-  const BolasEscolhidas({Key? key}) : super(key: key);
-
-  @override
-  State<BolasEscolhidas> createState() => _BolasEscolhidasState();
-}
-
-class _BolasEscolhidasState extends State<BolasEscolhidas> {
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 5,
-      ),
-      itemCount: 50,
-      itemBuilder: (BuildContext context, int index) {
-        return CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 5.0,
-        );
-      },
-    );
-  }
-}
-
-//class Bolas {
-
-
-
-

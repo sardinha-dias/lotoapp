@@ -14,29 +14,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int length = 50;
+    int max = 100;
+    int min = 1;
+
     int nextNumber({required int max, required int min}) =>
         min + Random().nextInt(max - min + 1);
 
-    final number = nextNumber(max: 20, min: 10);
+    final number = nextNumber(max: max, min: min);
     // min + Random().nextInt(max - min + 1);
     print(number);
 
-    // List<int> nextNumbers(int length, {required int min, required int max}) =>
-    //     Random().nextInt(max - min);
+    int nextNumbers(
+            {required int length, required int min, required int max}) =>
+        Random().nextInt(max - min);
 
-    //final list = List<int>.generate(10,(_)=> nextNumbers(10, max: 20, min: 5));
+    final list = List<int>.generate(
+        length, (_) => nextNumbers(length: length, max: max, min: min));
 
-    //  print(list);
+    print(list);
+    print(list.length);
 
     final numbers = Set<int>();
 
-    // while (numbers.length < length) {
-    //  final numbers = nextNumber(max: max, min: min);
+    while (numbers.length < list.length) {
+      final number = nextNumber(max: max, min: min);
 
-    //  numbers.add(numbers);
-    //   }
-    //  return numbers;
-
+      numbers.add(number);
+    }
+    //   return number;
+    print(numbers);
     return MaterialApp(
       routes: {
         // '/': (context) => LotoApp(),

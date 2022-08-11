@@ -5,25 +5,34 @@ class MainMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        IconButton(
-            icon: Image.asset('assets/logo-lotofacil.png'),
-            onPressed: () {
-              Navigator.of(context).pushNamed('/tela2');
-            }), 
-        TextButton(child: const Text('Lotofacio'), onPressed: () {}),
-        ElevatedButton(
-          child: const Text(
-            'Megasena',
+    return Center(
+      child: Column(
+        children: [
+          Expanded(
+            child: Expanded(
+              child: OutlinedButton.icon(
+                icon: Expanded(
+                  child: Image.asset(
+                    '/lotoapp/assets/logo-lotofacil.png',
+                    scale: 10,
+                  ),
+                ),
+            
+                label: Text('Lotomania'),
+            
+                // style: OutlinedButton.icon(
+                //     minimumSize: Size(280, 80),
+                //     textStyle: TextStyle(fontSize: 28),
+                //   primary: Colors.orange,
+                // onPrimary: Colors.black,
+                //    ),
+                //  child: Text('FlatButton Ativo'),
+                onPressed: () {},
+              ),
+            ),
           ),
-          onPressed: () {},
-        ),
-        ElevatedButton(
-          child: const Text('Quina'),
-          onPressed: () {},
-        )
-      ],
+        ],
+      ),
     );
   }
 }

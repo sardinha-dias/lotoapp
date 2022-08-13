@@ -1,6 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:lotoapp/widgets/loto_widget.dart';
 import 'package:lotoapp/widgets/lotomania_widget.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
 import 'package:lotoapp/widgets/quina_wiget.dart';
@@ -10,17 +10,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-   
     return MaterialApp(
       routes: {
         // '/': (context) => LotoApp(),
 
-        '/tela2': (context) => const QuinaWidget()
+        //  '/Quina': (context) => const QuinaWidget(),
+        //    '/Megasena': (context) => const QuinaWidget(),
+        //   '/Lotomania': (context) => const QuinaWidget(),
+        //   '/Lotofacil': (context) => const QuinaWidget(),
       },
       home: const LotoApp(),
     );

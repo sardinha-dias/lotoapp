@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lotoapp/widgets/main_menu_widget.dart';
 import '../style/bolas_sorteadas.dart';
 
 class LotomaniaWidget extends StatefulWidget {
@@ -46,18 +45,19 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: false,
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.green.shade400,
+      appBar: AppBar(
+        backgroundColor: Colors.green.shade400,
+        title: const Text('Palpites para Lotomania'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 60,
+            height: 20,
           ),
-          ElevatedButton(onPressed: _gera, child: Text('botão')),
           Expanded(
-            //  child: Container(
-            //   decoration: BoxDecoration(color: Colors.lightGreen),
+            flex: 6,
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 10,
@@ -70,30 +70,34 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               },
             ),
           ),
-          Text('$length'),
-          Center(
+          SizedBox(height: 20),
+          Expanded(
+            child: Text(
+              'Números escolhidos  $length',
+              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(
+            height: 80,
+          ),
+          Expanded(
+              flex: 1,
+              child: ElevatedButton(
+                  onPressed: _gera, child: Text('Gerar Números'))),
+          SizedBox(
+            height: 50,
+          ),
+          Expanded(
+            flex: 1,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Go back!'),
+              child: const Text('Voltar'),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _decrementa,
-                child: const Icon(Icons.arrow_back_rounded),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              ElevatedButton(
-                onPressed: _incrementa,
-                child: const Icon(Icons.arrow_forward_sharp),
-              ),
-            ],
+          SizedBox(
+            height: 90,
           )
         ],
       ),

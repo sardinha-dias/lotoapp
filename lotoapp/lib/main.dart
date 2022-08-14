@@ -33,16 +33,6 @@ class LotoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 13, 228, 24),
-      appBar: AppBar(
-        title: Text(
-          'Palpite Certo',
-        ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 13, 228, 24),
-      ),
-      body: const MainMenuWidget(),
-    );
+    return MainMenuWidget();
   }
 }

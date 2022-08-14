@@ -33,13 +33,17 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
 
   void _incrementa() {
     setState(() {
-      length++;
+      if (length < 20) {
+        length++;
+      }
     });
   }
 
   void _decrementa() {
     setState(() {
-      length--;
+      if (length > 15) {
+        length--;
+      }
     });
   }
 
@@ -56,8 +60,6 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
           ),
           ElevatedButton(onPressed: _gera, child: Text('botão')),
           Expanded(
-            //  child: Container(
-            //   decoration: BoxDecoration(color: Colors.lightGreen),
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 10,

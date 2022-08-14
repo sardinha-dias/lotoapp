@@ -9,18 +9,19 @@ class BolasSorteadas extends StatelessWidget {
   BolasSorteadas({
     this.sequencia,
   });
-  final double imageRadius = 15;
+  final double imageRadius = 17;
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       backgroundColor: Colors.white,
       radius: imageRadius,
       child: CircleAvatar(
-        backgroundColor: Colors.black54,
-        radius: imageRadius - 1,
+        backgroundColor: Colors.black87,
+        radius: imageRadius - 0.4,
         child: Text(
           sequencia.toString(),
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     );

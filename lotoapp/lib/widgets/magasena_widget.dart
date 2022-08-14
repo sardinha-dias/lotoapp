@@ -32,31 +32,32 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
 
   void _incrementa() {
     setState(() {
-      length++;
+      if (length < 15) {
+        length++;
+      }
     });
   }
 
   void _decrementa() {
     setState(() {
-      length--;
+      if (length > 6) {
+        length--;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: false,
-      backgroundColor: Colors.yellowAccent,
+      backgroundColor: Colors.green.shade400,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
             height: 60,
           ),
-          ElevatedButton(onPressed: _gera, child: Text('botão')),
           Expanded(
-            //  child: Container(
-            //   decoration: BoxDecoration(color: Colors.lightGreen),
+            flex: 2,
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 10,
@@ -69,31 +70,68 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
               },
             ),
           ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            'Quantidade de números',
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: _decrementa,
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  '$length',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  onPressed: _incrementa,
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: _gera,
+              child: Text(
+                'Gerar Números',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
+          SizedBox(
+            height: 50,
+          ),
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              height: 50,
+            ),
+          ),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Go back!'),
+              child: const Text('Voltar'),
             ),
           ),
-          Text('$length'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _decrementa,
-                child: const Icon(Icons.arrow_back_rounded),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              ElevatedButton(
-                onPressed: _incrementa,
-                child: const Icon(Icons.arrow_forward_sharp),
-              ),
-            ],
-          )
         ],
       ),
     );

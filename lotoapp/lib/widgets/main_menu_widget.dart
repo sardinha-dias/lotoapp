@@ -33,7 +33,12 @@ class MainMenuWidget extends StatelessWidget {
                 );
               },
               child: (Card(
-                elevation: 1.5,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.black45,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0)),
+                elevation: 1,
                 color: Colors.transparent,
                 child: SizedBox(
                   height: 50,
@@ -50,7 +55,7 @@ class MainMenuWidget extends StatelessWidget {
                       Text(
                         'Quina',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 32, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -66,7 +71,12 @@ class MainMenuWidget extends StatelessWidget {
                 );
               },
               child: (Card(
-                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.black45,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0)),
+                elevation: 1.5,
                 color: Colors.transparent,
                 child: SizedBox(
                   height: 50,
@@ -83,7 +93,9 @@ class MainMenuWidget extends StatelessWidget {
                       Text(
                         'Megasena',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -99,6 +111,11 @@ class MainMenuWidget extends StatelessWidget {
                 );
               },
               child: (Card(
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.black45,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0)),
                 elevation: 1.5,
                 color: Colors.transparent,
                 child: SizedBox(
@@ -116,7 +133,7 @@ class MainMenuWidget extends StatelessWidget {
                       Text(
                         'Lotomania',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 32, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -132,6 +149,11 @@ class MainMenuWidget extends StatelessWidget {
                 );
               },
               child: (Card(
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: Colors.black45,
+                    ),
+                    borderRadius: BorderRadius.circular(20.0)),
                 elevation: 1.5,
                 color: Colors.transparent,
                 child: SizedBox(
@@ -149,7 +171,7 @@ class MainMenuWidget extends StatelessWidget {
                       Text(
                         'Lotofácil',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 32, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

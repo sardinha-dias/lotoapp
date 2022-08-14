@@ -86,6 +86,9 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                  ),
                   onPressed: _decrementa,
                   child: const Icon(Icons.remove),
                 ),
@@ -100,6 +103,9 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                   width: 20,
                 ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                  ),
                   onPressed: _incrementa,
                   child: const Icon(Icons.add),
                 ),
@@ -110,11 +116,18 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
             height: 20,
           ),
           ElevatedButton(
-              onPressed: _gera,
-              child: Text(
-                'Gerar Números',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0), // <-- Radius
+              ),
+            ),
+            onPressed: _gera,
+            child: Text(
+              'Gerar Números',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
           SizedBox(
             height: 50,
           ),

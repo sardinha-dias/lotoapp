@@ -52,8 +52,10 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.green.shade400,
-        title: const Text('Palpites para a Quina')),
+      appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.green.shade400,
+          title: const Text('Palpites para a Quina')),
       backgroundColor: Colors.green.shade400,
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const SizedBox(
@@ -89,6 +91,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                ),
                 onPressed: _decrementa,
                 child: const Icon(Icons.remove),
               ),
@@ -103,6 +108,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                 width: 20,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.transparent,
+                ),
                 onPressed: _incrementa,
                 child: const Icon(Icons.add),
               ),
@@ -113,6 +121,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
           height: 20,
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.transparent,
+          ),
           onPressed: _gera,
           child: Text(
             'Gerar Números',

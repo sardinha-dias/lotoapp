@@ -33,6 +33,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -53,7 +54,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
                         style: BorderStyle.solid)),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
+                    padding: const EdgeInsets.only(bottom: 10.0),
                     child: Center(
                       child: GridView.builder(
                         gridDelegate:
@@ -80,15 +81,15 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
                 child: Container(
                   padding: EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18.0),
-                    color: Colors.amberAccent,
-                  ),
+                      borderRadius: BorderRadius.circular(18.0),
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.black, width: 1.0)),
                   child: Column(
                     children: [
                       Text(
                         'Quantidade de números',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 10,
@@ -96,7 +97,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
                       Text(
                         '$length',
                         style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 20,
@@ -121,18 +122,15 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
-            height: 50,
-          ),
-          SizedBox(
-            height: 50,
-          ),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Voltar'),
+              child: const Text(
+                'Voltar',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              ),
               style: ElevatedButton.styleFrom(
                 primary: Colors.transparent,
                 shape: RoundedRectangleBorder(

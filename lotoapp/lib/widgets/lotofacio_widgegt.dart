@@ -62,9 +62,9 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
               height: 150,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.amber,
-                ),
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 1.0)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
@@ -94,14 +94,14 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                 padding: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.amber,
+                  color: Colors.transparent,
                 ),
                 child: Column(
                   children: [
                     Text(
                       'Quantidade de números',
                       style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 20,
@@ -128,7 +128,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                           Text(
                             '$length',
                             style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: 20,

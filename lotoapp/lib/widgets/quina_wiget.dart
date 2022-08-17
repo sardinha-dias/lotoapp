@@ -53,6 +53,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyan.shade100,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -65,9 +66,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
               height: 150,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.amberAccent,
-                ),
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 1.0)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
@@ -97,17 +98,18 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                 padding: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.amber,
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.black, width: 1.0),
                 ),
                 child: Column(
                   children: [
                     Text(
                       'Quantidade de números',
                       style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Expanded(
                       flex: 1,
@@ -131,7 +133,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                           Text(
                             '$length',
                             style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: 20,

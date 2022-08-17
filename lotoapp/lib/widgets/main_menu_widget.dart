@@ -39,7 +39,7 @@ class MainMenuWidget extends StatelessWidget {
               height: 15,
             ),
             BotaoMenu(
-              jogo: 'quina',
+              jogo: 'Quina',
               logo: 'assets/logo-lotofacil.png',
               passar: 'quina',
             ),

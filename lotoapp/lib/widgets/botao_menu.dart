@@ -64,22 +64,3 @@ class BotaoMenu extends StatelessWidget {
         )));
   }
 }
-
-/*class Passar extends StatelessWidget {
-  String? passar;
-
-  Passar({Key? key, this.passar}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (passar == 'lotofacil') {
-      return LotofacioWidget();
-    } else if (passar == 'quina') {
-      return QuinaWidget();
-    } else if (passar == 'megasena') {
-      return MegaSenaWidget();
-    } else {
-      return LotomaniaWidget();
-    }
-  }
-}*/

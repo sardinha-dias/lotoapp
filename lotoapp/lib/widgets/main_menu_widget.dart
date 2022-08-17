@@ -1,12 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:lotoapp/widgets/botao_menu.dart';
-import 'package:lotoapp/widgets/quina_wiget.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'lotofacio_widgegt.dart';
-import 'lotomania_widget.dart';
-import 'magasena_widget.dart';
 
 class MainMenuWidget extends StatelessWidget {
   const MainMenuWidget({Key? key}) : super(key: key);
@@ -14,11 +7,12 @@ class MainMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
-          color: Color(0xff7c94b6),
+          color: const Color(0xff7c94b6),
           image: DecorationImage(
-            image: AssetImage("assets/back_menu.jpg"),
+            image: const AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.5), BlendMode.dstATop),
@@ -27,15 +21,16 @@ class MainMenuWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 150,
             ),
-            Text('escolha uma das modalidades Abaixo para gerar os números',
+            const Text(
+                'escolha uma das modalidades Abaixo para gerar os números',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: Colors.white)),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             BotaoMenu(
@@ -43,7 +38,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-lotofacil.png',
               passar: 'quina',
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             BotaoMenu(
@@ -51,7 +46,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-megasena.png',
               passar: 'megasena',
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             BotaoMenu(
@@ -59,7 +54,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-lotomania.png',
               passar: 'lotomania',
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             BotaoMenu(

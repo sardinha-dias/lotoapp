@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lotoapp/widgets/lotofacio_widgegt.dart';
-import 'package:lotoapp/widgets/magasena_widget.dart';
-import 'package:lotoapp/widgets/quina_wiget.dart';
+import 'lotofacio_widgegt.dart';
+import 'magasena_widget.dart';
+import 'quina_wiget.dart';
 
 import 'lotomania_widget.dart';
 
@@ -11,7 +11,7 @@ class BotaoMenu extends StatelessWidget {
   final String jogo;
   final String passar;
 
-  BotaoMenu(
+  const BotaoMenu(
       {Key? key, required this.jogo, required this.logo, required this.passar})
       : super(key: key);
 
@@ -23,17 +23,17 @@ class BotaoMenu extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => passar == 'quina'
-                    ? QuinaWidget()
+                    ? const QuinaWidget()
                     : passar == 'lotofacil'
-                        ? LotofacioWidget()
+                        ? const LotofacioWidget()
                         : passar == 'megasena'
-                            ? MegaSenaWidget()
-                            : LotomaniaWidget()),
+                            ? const MegaSenaWidget()
+                            : const LotomaniaWidget()),
           );
         },
         child: (Card(
           shape: RoundedRectangleBorder(
-              side: BorderSide(
+              side: const BorderSide(
                 color: Colors.black45,
               ),
               borderRadius: BorderRadius.circular(20.0)),
@@ -44,19 +44,21 @@ class BotaoMenu extends StatelessWidget {
             width: 400,
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 Image.asset(logo),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
-                Text(
-                  jogo,
-                  style: GoogleFonts.rubik(
-                      fontSize: 40,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white),
+                Center(
+                  child: Text(
+                    jogo,
+                    style: GoogleFonts.rubik(
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white),
+                  ),
                 ),
               ],
             ),

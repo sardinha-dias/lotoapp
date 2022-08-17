@@ -45,9 +45,12 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               height: 260,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.amberAccent,
-                ),
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(
+                        color: Colors.black,
+                        width: 2.0,
+                        style: BorderStyle.solid)),
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 20.0),

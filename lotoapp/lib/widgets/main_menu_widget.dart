@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lotoapp/widgets/botao_menu.dart';
 import 'package:lotoapp/widgets/quina_wiget.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'lotofacio_widgegt.dart';
 import 'lotomania_widget.dart';
 import 'magasena_widget.dart';
@@ -15,172 +16,59 @@ class MainMenuWidget extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
+          color: Color(0xff7c94b6),
           image: DecorationImage(
             image: AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.5), BlendMode.dstATop),
+            //    opacity: 1.0
           ),
         ),
         child: Column(
           children: [
             SizedBox(
-              height: 100,
+              height: 150,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const QuinaWidget()),
-                );
-              },
-              child: (Card(
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black45,
-                    ),
-                    borderRadius: BorderRadius.circular(20.0)),
-                elevation: 1,
-                color: Colors.transparent,
-                child: SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Image.asset('assets/logo-quina.png'),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Quina',
-                        style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              )),
+            Text('escolha uma das modalidades Abaixo para gerar os números',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white)),
+            SizedBox(
+              height: 15,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MegaSenaWidget()),
-                );
-              },
-              child: (Card(
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black45,
-                    ),
-                    borderRadius: BorderRadius.circular(20.0)),
-                elevation: 1.5,
-                color: Colors.transparent,
-                child: SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Image.asset('assets/logo-megasena.png'),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Megasena',
-                        style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              )),
+            BotaoMenu(
+              jogo: 'quina',
+              logo: 'assets/logo-lotofacil.png',
+              passar: 'quina',
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LotomaniaWidget()),
-                );
-              },
-              child: (Card(
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black45,
-                    ),
-                    borderRadius: BorderRadius.circular(20.0)),
-                elevation: 1.5,
-                color: Colors.transparent,
-                child: SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Image.asset('assets/logo-lotomania.png'),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Lotomania',
-                        style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              )),
+            SizedBox(
+              height: 10,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LotofacioWidget()),
-                );
-              },
-              child: (Card(
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black45,
-                    ),
-                    borderRadius: BorderRadius.circular(20.0)),
-                elevation: 1.5,
-                color: Colors.transparent,
-                child: SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Image.asset('assets/logo-lotofacil.png'),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Lotofácil',
-                        style: TextStyle(
-                            fontSize: 32, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              )),
-            )
+            BotaoMenu(
+              jogo: 'Megasena',
+              logo: 'assets/logo-megasena.png',
+              passar: 'megasena',
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            BotaoMenu(
+              jogo: 'Lotomania',
+              logo: 'assets/logo-lotomania.png',
+              passar: 'lotomania',
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            BotaoMenu(
+              jogo: 'Lotofácio',
+              logo: 'assets/logo-lotofacil.png',
+              passar: 'lotofacil',
+            ),
           ],
         ),
-        /* add child content here */
       ),
     );
   }

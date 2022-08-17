@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../style/bolas_sorteadas.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MegaSenaWidget extends StatefulWidget {
   const MegaSenaWidget({Key? key}) : super(key: key);
@@ -34,6 +35,15 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length < 15) {
         length++;
+      } else {
+        Fluttertoast.showToast(
+            msg: "O número máximo de números para apostar é 15",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     });
   }
@@ -42,6 +52,15 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length > 6) {
         length--;
+      } else {
+        Fluttertoast.showToast(
+            msg: "O número mínimo de números para apostar é 6",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     });
   }
@@ -49,83 +68,124 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade400,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
             height: 60,
           ),
-          Expanded(
-            flex: 2,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 10,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 150,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.amber,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 10,
+                    ),
+                    itemCount: listnumbers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BolasSorteadas(
+                        sequencia: listnumbers.elementAt(index),
+                      );
+                    },
+                  ),
+                ),
               ),
-              itemCount: listnumbers.length,
-              itemBuilder: (BuildContext context, int index) {
-                return BolasSorteadas(
-                  sequencia: listnumbers.elementAt(index),
-                );
-              },
             ),
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            'Quantidade de números',
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.transparent,
-                  ),
-                  onPressed: _decrementa,
-                  child: const Icon(Icons.remove),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 200,
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.amber,
                 ),
-                const SizedBox(
-                  width: 20,
+                child: Column(
+                  children: [
+                    Text(
+                      'Quantidade de números',
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _decrementa,
+                            child: const Icon(Icons.remove),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '$length',
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _incrementa,
+                            child: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(18.0), // <-- Radius
+                        ),
+                      ),
+                      onPressed: _gera,
+                      child: Text(
+                        'Gerar Números',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  '$length',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.transparent,
-                  ),
-                  onPressed: _incrementa,
-                  child: const Icon(Icons.add),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0), // <-- Radius
               ),
-            ),
-            onPressed: _gera,
-            child: Text(
-              'Gerar Números',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
@@ -143,6 +203,12 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                 Navigator.pop(context);
               },
               child: const Text('Voltar'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
+                ),
+              ),
             ),
           ),
         ],

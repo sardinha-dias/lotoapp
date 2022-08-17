@@ -50,91 +50,151 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.green.shade400,
-          title: const Text('Palpites para a Lotofácil')),
-      backgroundColor: Colors.green.shade400,
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const SizedBox(
-          height: 60,
-        ),
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 10,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 60,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 150,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.amber,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 10,
+                    ),
+                    itemCount: listnumbers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BolasSorteadas(
+                        sequencia: listnumbers.elementAt(index),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
-            itemCount: listnumbers.length,
-            itemBuilder: (BuildContext context, int index) {
-              return BolasSorteadas(
-                sequencia: listnumbers.elementAt(index),
-              );
-            },
           ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Text(
-          'Quantidade de números',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Expanded(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _decrementa,
-                child: const Icon(Icons.remove),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Text(
-                '$length',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              ElevatedButton(
-                onPressed: _incrementa,
-                child: const Icon(Icons.add),
-              ),
-            ],
+          SizedBox(
+            height: 5,
           ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        ElevatedButton(
-          onPressed: _gera,
-          child: Text(
-            'Gerar Números',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: 200,
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.amber,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Quantidade de números',
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _decrementa,
+                            child: const Icon(Icons.remove),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '$length',
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _incrementa,
+                            child: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(18.0), // <-- Radius
+                        ),
+                      ),
+                      onPressed: _gera,
+                      child: Text(
+                        'Gerar Números',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        Expanded(
-          flex: 3,
-          child: SizedBox(
+          SizedBox(
             height: 50,
           ),
-        ),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Voltar'),
+          Expanded(
+            flex: 3,
+            child: SizedBox(
+              height: 50,
+            ),
           ),
-        ),
-      ]),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Voltar'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

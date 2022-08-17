@@ -1,9 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lotoapp/widgets/loto_widget.dart';
-import 'package:lotoapp/widgets/lotomania_widget.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
-import 'package:lotoapp/widgets/quina_wiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,25 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        // '/': (context) => LotoApp(),
-
-        //  '/Quina': (context) => const QuinaWidget(),
-        //    '/Megasena': (context) => const QuinaWidget(),
-        //   '/Lotomania': (context) => const QuinaWidget(),
-        //   '/Lotofacil': (context) => const QuinaWidget(),
-      },
-      home: const LotoApp(),
+    return const MaterialApp(
+      home: MainMenuWidget(),
     );
-  }
-}
-
-class LotoApp extends StatelessWidget {
-  const LotoApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MainMenuWidget();
   }
 }

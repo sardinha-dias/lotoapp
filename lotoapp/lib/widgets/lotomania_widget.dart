@@ -30,75 +30,114 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
     });
   }
 
-  void _incrementa() {
-    setState(() {
-      length++;
-    });
-  }
-
-  void _decrementa() {
-    setState(() {
-      length--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green.shade400,
-      appBar: AppBar(
-        backgroundColor: Colors.green.shade400,
-        title: const Text('Palpites para Lotomania'),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(
+            height: 60,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: SizedBox(
+              height: 260,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.amberAccent,
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Center(
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 10,
+                        ),
+                        itemCount: listnumbers.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return BolasSorteadas(
+                            sequencia: listnumbers.elementAt(index),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 100,
+                child: Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.amberAccent,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Quantidade de números',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        '$length',
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+          SizedBox(
             height: 20,
           ),
-          Expanded(
-            flex: 6,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 10,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0), // <-- Radius
               ),
-              itemCount: listnumbers.length,
-              itemBuilder: (BuildContext context, int index) {
-                return BolasSorteadas(
-                  sequencia: listnumbers.elementAt(index),
-                );
-              },
             ),
-          ),
-          SizedBox(height: 20),
-          Expanded(
+            onPressed: _gera,
             child: Text(
-              'Números escolhidos  $length',
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              'Gerar Números',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
-            height: 80,
-          ),
-          Expanded(
-              flex: 1,
-              child: ElevatedButton(
-                  onPressed: _gera, child: Text('Gerar Números'))),
           SizedBox(
             height: 50,
           ),
-          Expanded(
-            flex: 1,
+          SizedBox(
+            height: 50,
+          ),
+          Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text('Voltar'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
+                ),
+              ),
             ),
           ),
-          SizedBox(
-            height: 90,
-          )
         ],
       ),
     );

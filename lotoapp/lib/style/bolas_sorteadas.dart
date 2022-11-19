@@ -5,6 +5,7 @@ class BolasSorteadas extends StatelessWidget {
   final int? sequencia;
 
   const BolasSorteadas({
+    super.key,
     this.sequencia,
   });
   final double imageRadius = 17;

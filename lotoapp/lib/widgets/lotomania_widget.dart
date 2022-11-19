@@ -111,7 +111,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.transparent,
+              backgroundColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0), // <-- Radius
               ),
@@ -127,15 +127,15 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text(
-                'Voltar',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-              ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0), // <-- Radius
                 ),
+              ),
+              child: const Text(
+                'Voltar',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
               ),
             ),
           ),

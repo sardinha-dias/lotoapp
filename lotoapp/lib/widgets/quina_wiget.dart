@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lotoapp/widgets/main_menu_widget.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
 
 class QuinaWidget extends StatefulWidget {
@@ -36,9 +35,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     setState(() {
       if (length < 15) {
         length++;
-      } else {
-        print('aposta maxima');
-      }
+      } else {}
     });
   }
 
@@ -118,7 +115,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.transparent,
+                              backgroundColor: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(18.0), // <-- Radius
@@ -140,7 +137,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.transparent,
+                              backgroundColor: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(18.0), // <-- Radius
@@ -157,7 +154,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
+                        backgroundColor: Colors.transparent,
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(18.0), // <-- Radius
@@ -189,13 +186,13 @@ class _QuinaWidgetState extends State<QuinaWidget> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Voltar'),
               style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0), // <-- Radius
                 ),
               ),
+              child: const Text('Voltar'),
             ),
           ),
         ],

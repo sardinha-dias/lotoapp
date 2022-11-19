@@ -5,17 +5,15 @@ class Botoes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0), // <-- Radius
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0), // <-- Radius
         ),
-        onPressed: () {},
-        child: const Icon(Icons.add),
       ),
+      onPressed: () {},
+      child: const Icon(Icons.add),
     );
   }
 }

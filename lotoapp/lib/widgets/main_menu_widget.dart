@@ -20,17 +20,16 @@ class MainMenuWidget extends StatelessWidget {
           ),
         ),
         child: Column(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 150,
             ),
-            const Text(
-                'escolha uma das modalidades Abaixo para gerar os números',
+            Text('escolha uma das modalidades Abaixo para gerar os números',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: Colors.white)),
-            const SizedBox(
+            SizedBox(
               height: 15,
             ),
             BotaoMenu(
@@ -38,7 +37,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-lotofacil.png',
               passar: 'quina',
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             BotaoMenu(
@@ -46,7 +45,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-megasena.png',
               passar: 'megasena',
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             BotaoMenu(
@@ -54,7 +53,7 @@ class MainMenuWidget extends StatelessWidget {
               logo: 'assets/logo-lotomania.png',
               passar: 'lotomania',
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             BotaoMenu(

@@ -6,7 +6,7 @@ class LotoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.lightGreen, body: const QuinaWidget());
+    return const Scaffold(
+        backgroundColor: Colors.lightGreen, body: QuinaWidget());
   }
 }

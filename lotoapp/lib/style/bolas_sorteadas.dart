@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:lotoapp/widgets/quina_wiget.dart';
+//import 'package:lotoapp/widgets/quina_wiget.dart';
 
 class BolasSorteadas extends StatelessWidget {
   final int? sequencia;
 
-  BolasSorteadas({
+  const BolasSorteadas({
     this.sequencia,
   });
   final double imageRadius = 17;

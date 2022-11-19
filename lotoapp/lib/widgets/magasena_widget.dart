@@ -71,9 +71,9 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
       backgroundColor: Colors.grey.shade400,
       body: Container(
         decoration: BoxDecoration(
-          color: Color(0xff7c94b6),
+          color: const Color(0xff7c94b6),
           image: DecorationImage(
-            image: AssetImage("assets/back_menu.jpg"),
+            image: const AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.5), BlendMode.dstATop),
@@ -113,7 +113,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Padding(
@@ -121,19 +121,19 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
               child: SizedBox(
                 height: 200,
                 child: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
                       border: Border.all(color: Colors.black, width: 1.0)),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Quantidade de números',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Expanded(
@@ -157,10 +157,10 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                             ),
                             Text(
                               '$length',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 28, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             ElevatedButton(
@@ -177,7 +177,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ElevatedButton(
@@ -189,7 +189,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                           ),
                         ),
                         onPressed: _gera,
-                        child: Text(
+                        child: const Text(
                           'Gerar Números',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
@@ -200,10 +200,10 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Expanded(
+            const Expanded(
               flex: 3,
               child: SizedBox(
                 height: 50,

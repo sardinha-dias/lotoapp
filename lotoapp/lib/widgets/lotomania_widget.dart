@@ -79,34 +79,34 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               child: SizedBox(
                 height: 100,
                 child: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
                       border: Border.all(color: Colors.black, width: 1.0)),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Quantidade de números',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
                         '$length',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                     ],
                   ),
                 ),
               )),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(
@@ -117,7 +117,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               ),
             ),
             onPressed: _gera,
-            child: Text(
+            child: const Text(
               'Gerar Números',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),

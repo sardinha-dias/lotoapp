@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class QuinaWidget extends StatefulWidget {
   const QuinaWidget({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   int length = 5;
   int max = 80;
   int min = 1;
+  int tamanho = 5;
   List<int> listnumbers = List<int>.filled(5, 0, growable: true);
 
   void _gera() {
@@ -35,7 +37,18 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     setState(() {
       if (length < 15) {
         length++;
-      } else {}
+        tamanho = length;
+        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+      } else {
+        Fluttertoast.showToast(
+            msg: "O quantidade máximo de números para apostar é 15",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     });
   }
 
@@ -43,6 +56,18 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     setState(() {
       if (length > 5) {
         length--;
+        tamanho = length;
+
+        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+      } else {
+        Fluttertoast.showToast(
+            msg: "O quantidade mínima de números para apostar é 5",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     });
   }
@@ -73,7 +98,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 10,
                     ),
-                    itemCount: listnumbers.length,
+                    itemCount: tamanho, // listnumbers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return BolasSorteadas(
                         sequencia: listnumbers.elementAt(index),

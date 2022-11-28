@@ -11,6 +11,8 @@ class LotomaniaWidget extends StatefulWidget {
 
 class _LotomaniaWidgetState extends State<LotomaniaWidget> {
   var numbers = Set<int>();
+  var listadePalpites = Set<List>();
+
   int length = 50;
   int max = 100;
   int min = 1;
@@ -26,6 +28,8 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
       }
       listnumbers = numbers.toList();
       listnumbers.sort();
+      listadePalpites.add(listnumbers);
+
       numbers.clear();
     });
   }
@@ -120,6 +124,26 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
             child: const Text(
               'Gerar Números',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18.0),
+              color: Colors.transparent,
+              border: Border.all(color: Colors.black, width: 1.0),
+            ),
+            child: SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: ListView.builder(
+                  itemCount: listadePalpites.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: 15,
+                      child: Text(listadePalpites.elementAt(index).toString()),
+                    );
+                  }),
             ),
           ),
           Center(

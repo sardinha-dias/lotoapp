@@ -13,6 +13,7 @@ class QuinaWidget extends StatefulWidget {
 
 class _QuinaWidgetState extends State<QuinaWidget> {
   var numbers = Set<int>();
+  var listadePalpites = Set<List>();
   int length = 5;
   int max = 80;
   int min = 1;
@@ -29,6 +30,8 @@ class _QuinaWidgetState extends State<QuinaWidget> {
       }
       listnumbers = numbers.toList();
       listnumbers.sort();
+
+      listadePalpites.add(listnumbers);
       numbers.clear();
     });
   }
@@ -76,6 +79,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan.shade100,
+      appBar: AppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -98,7 +102,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 10,
                     ),
-                    itemCount: tamanho, // listnumbers.length,
+                    itemCount: listnumbers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return BolasSorteadas(
                         sequencia: listnumbers.elementAt(index),
@@ -195,6 +199,29 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                   ],
                 ),
               ),
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18.0),
+              color: Colors.transparent,
+              border: Border.all(color: Colors.black, width: 1.0),
+            ),
+            child: SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: ListView.builder(
+                  itemCount: listadePalpites.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: 30,
+                      child: Text(listadePalpites.elementAt(index).toString()),
+                    );
+                  }),
             ),
           ),
           const SizedBox(

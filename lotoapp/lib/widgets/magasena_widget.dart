@@ -12,6 +12,8 @@ class MegaSenaWidget extends StatefulWidget {
 
 class _MegaSenaWidgetState extends State<MegaSenaWidget> {
   var numbers = Set<int>();
+  var listadePalpites = Set<List>();
+
   int length = 6;
   int max = 60;
   int min = 1;
@@ -29,6 +31,8 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
       }
       listnumbers = numbers.toList();
       listnumbers.sort();
+      listadePalpites.add(listnumbers);
+
       numbers.clear();
     });
   }
@@ -207,7 +211,28 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 5,
+            ),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18.0),
+                color: Colors.transparent,
+                border: Border.all(color: Colors.black, width: 1.0),
+              ),
+              child: SizedBox(
+                height: 100,
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: listadePalpites.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 15,
+                        child:
+                            Text(listadePalpites.elementAt(index).toString()),
+                      );
+                    }),
+              ),
             ),
             const Expanded(
               flex: 3,

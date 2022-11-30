@@ -10,7 +10,7 @@ class MainMenuWidget extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Container(
         decoration: BoxDecoration(
-          color: const Color(0xff7c94b6),
+          //  color: const Color(0xff7c94b6),
           image: DecorationImage(
             image: const AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
@@ -34,7 +34,7 @@ class MainMenuWidget extends StatelessWidget {
             ),
             BotaoMenu(
               jogo: 'Quina',
-              logo: 'assets/logo-lotofacil.png',
+              logo: 'assets/logo-quina.png',
               passar: 'quina',
             ),
             SizedBox(

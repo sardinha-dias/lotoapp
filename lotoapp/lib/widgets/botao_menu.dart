@@ -54,7 +54,7 @@ class BotaoMenu extends StatelessWidget {
                 child: Text(
                   jogo,
                   style: GoogleFonts.rubik(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.normal,
                       color: Colors.white),
                 ),

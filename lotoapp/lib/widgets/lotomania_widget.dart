@@ -10,6 +10,7 @@ class LotomaniaWidget extends StatefulWidget {
 }
 
 class _LotomaniaWidgetState extends State<LotomaniaWidget> {
+  final ScrollController _firstController = ScrollController();
   var numbers = Set<int>();
   var listadePalpites = Set<List>();
 
@@ -37,17 +38,15 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      //  backgroundColor: Colors.blueGrey,
+      appBar: AppBar(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 60,
-          ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: SizedBox(
-              height: 260,
+              height: 220,
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18.0),
@@ -78,7 +77,7 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               ),
             ),
           ),
-          Padding(
+          /*  Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 height: 100,
@@ -110,8 +109,9 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
                   ),
                 ),
               )),
+              */
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -126,44 +126,59 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18.0),
-              color: Colors.transparent,
-              border: Border.all(color: Colors.black, width: 1.0),
-            ),
-            child: SizedBox(
-              height: 100,
-              width: double.infinity,
-              child: ListView.builder(
-                  itemCount: listadePalpites.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 15,
-                      child: Text(listadePalpites.elementAt(index).toString()),
-                    );
-                  }),
+          SizedBox(
+            height: 10,
+          ),
+          Flexible(
+            flex: 2,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18.0),
+                color: Colors.transparent,
+                border: Border.all(color: Colors.black, width: 1.0),
+              ),
+              // child: SizedBox(
+              //  height: 100,
+              //  width: double.infinity,
+              child: Scrollbar(
+                thumbVisibility: true,
+                controller: _firstController,
+                child: ListView.builder(
+                    controller: _firstController,
+                    itemCount: listadePalpites.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 70,
+                        child: Text(
+                          listadePalpites.elementAt(index).toString(),
+                        ),
+                      );
+                    }),
+              ),
             ),
           ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
-                ),
-              ),
-              child: const Text(
-                'Voltar',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-              ),
-            ),
+          //    ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            label: 'Salvar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: 'Sorte',
           ),
         ],
+        // currentIndex: _selectedIndex,
+        //   selectedItemColor: Colors.amber[800],
+        //   onTap: _onItemTapped,
       ),
     );
   }

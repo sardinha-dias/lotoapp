@@ -12,6 +12,8 @@ class QuinaWidget extends StatefulWidget {
 }
 
 class _QuinaWidgetState extends State<QuinaWidget> {
+  final ScrollController _firstController = ScrollController();
+
   var numbers = Set<int>();
   var listadePalpites = Set<List>();
   int length = 5;
@@ -30,7 +32,6 @@ class _QuinaWidgetState extends State<QuinaWidget> {
       }
       listnumbers = numbers.toList();
       listnumbers.sort();
-
       listadePalpites.add(listnumbers);
       numbers.clear();
     });
@@ -78,23 +79,24 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan.shade100,
+      resizeToAvoidBottomInset: false,
+      //  backgroundColor: Colors.cyan.shade100,
       appBar: AppBar(),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 60,
-          ),
+          //const SizedBox(
+          //    height: 10,
+          //  ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              height: 150,
+              height: 100,
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18.0),
                     color: Colors.transparent,
-                    border: Border.all(color: Colors.black, width: 1.0)),
+                    border: Border.all(color: Colors.black, width: 2.0)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GridView.builder(
@@ -119,13 +121,13 @@ class _QuinaWidgetState extends State<QuinaWidget> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
-              height: 200,
+              height: 100,
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18.0),
                   color: Colors.transparent,
-                  border: Border.all(color: Colors.black, width: 1.0),
+                  border: Border.all(color: Colors.black, width: 2.0),
                 ),
                 child: Column(
                   children: [
@@ -134,106 +136,107 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(18.0), // <-- Radius
-                              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(18.0), // <-- Radius
                             ),
-                            onPressed: _decrementa,
-                            child: const Icon(Icons.remove),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            '$length',
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(18.0), // <-- Radius
-                              ),
-                            ),
-                            onPressed: _incrementa,
-                            child: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(18.0), // <-- Radius
+                          onPressed: _decrementa,
+                          child: const Icon(Icons.remove),
                         ),
-                      ),
-                      onPressed: _gera,
-                      child: const Text(
-                        'Gerar Números',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          '$length',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(18.0), // <-- Radius
+                            ),
+                          ),
+                          onPressed: _incrementa,
+                          child: const Icon(Icons.add),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
             ),
           ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0), // <-- Radius
+              ),
+            ),
+            onPressed: _gera,
+            child: const Text(
+              'Gerar Números',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+
           const SizedBox(
             height: 5,
           ),
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18.0),
-              color: Colors.transparent,
-              border: Border.all(color: Colors.black, width: 1.0),
-            ),
-            child: SizedBox(
-              height: 100,
-              width: double.infinity,
-              child: ListView.builder(
-                  itemCount: listadePalpites.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 30,
-                      child: Text(listadePalpites.elementAt(index).toString()),
-                    );
-                  }),
+
+          Flexible(
+            flex: 2,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18.0),
+                color: Colors.transparent,
+                border: Border.all(color: Colors.black, width: 2.0),
+              ),
+              // child: SizedBox(
+              //    height: 100,
+              //    width: double.infinity,
+              child: Scrollbar(
+                thumbVisibility: true,
+                controller: _firstController,
+                child: ListView.builder(
+                    controller: _firstController,
+                    itemCount: listadePalpites.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child:
+                            Text(listadePalpites.elementAt(index).toString()),
+                      );
+                    }),
+              ),
             ),
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          const Expanded(
-            flex: 3,
-            child: SizedBox(
-              height: 50,
-            ),
-          ),
-          Center(
+          // ),
+
+          //  const SizedBox(
+          //    height: 50,
+          ///   ),
+          //    const Expanded(
+          //      flex: 3,
+          //       child: SizedBox(
+          //         height: 50,
+          //         ),
+          //         ),
+          /*   Center(
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -246,9 +249,29 @@ class _QuinaWidgetState extends State<QuinaWidget> {
               ),
               child: const Text('Voltar'),
             ),
-          ),
+          ),*/
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            label: 'Salvar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: 'Sorte',
+          ),
+        ],
+        // currentIndex: _selectedIndex,
+        //   selectedItemColor: Colors.amber[800],
+        //   onTap: _onItemTapped,
+      ),
+      //  );
     );
   }
 }

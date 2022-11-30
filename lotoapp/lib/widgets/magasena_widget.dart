@@ -11,6 +11,8 @@ class MegaSenaWidget extends StatefulWidget {
 }
 
 class _MegaSenaWidgetState extends State<MegaSenaWidget> {
+  final ScrollController _firstController = ScrollController();
+
   var numbers = Set<int>();
   var listadePalpites = Set<List>();
 
@@ -78,10 +80,11 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
+      appBar: AppBar(),
       body: Container(
         decoration: BoxDecoration(
-          color: const Color(0xff7c94b6),
+          //  color: const Color(0xff7c94b6),
           image: DecorationImage(
             image: const AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
@@ -104,7 +107,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
-                      border: Border.all(color: Colors.black, width: 1.0)),
+                      border: Border.all(color: Colors.black, width: 2.0)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.builder(
@@ -135,7 +138,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
-                      border: Border.all(color: Colors.black, width: 1.0)),
+                      border: Border.all(color: Colors.black, width: 2.0)),
                   child: Column(
                     children: [
                       const Text(
@@ -213,25 +216,33 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
             const SizedBox(
               height: 5,
             ),
-            Container(
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.0),
-                color: Colors.transparent,
-                border: Border.all(color: Colors.black, width: 1.0),
-              ),
-              child: SizedBox(
-                height: 100,
-                width: double.infinity,
-                child: ListView.builder(
-                    itemCount: listadePalpites.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 15,
-                        child:
-                            Text(listadePalpites.elementAt(index).toString()),
-                      );
-                    }),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18.0),
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.black, width: 2.0),
+                ),
+                child: SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: _firstController,
+                    child: ListView.builder(
+                        controller: _firstController,
+                        itemCount: listadePalpites.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 30,
+                            child: Text(
+                                listadePalpites.elementAt(index).toString()),
+                          );
+                        }),
+                  ),
+                ),
               ),
             ),
             const Expanded(

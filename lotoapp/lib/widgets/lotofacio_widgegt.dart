@@ -11,6 +11,7 @@ class LotofacioWidget extends StatefulWidget {
 }
 
 class _LotofacioWidgetState extends State<LotofacioWidget> {
+  final ScrollController _firstController = ScrollController();
   var numbers = Set<int>();
   var listadePalpites = Set<List>();
 
@@ -78,6 +79,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -211,14 +213,20 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
             child: SizedBox(
               height: 100,
               width: double.infinity,
-              child: ListView.builder(
-                  itemCount: listadePalpites.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 15,
-                      child: Text(listadePalpites.elementAt(index).toString()),
-                    );
-                  }),
+              child: Scrollbar(
+                thumbVisibility: true,
+                controller: _firstController,
+                child: ListView.builder(
+                    controller: _firstController,
+                    itemCount: listadePalpites.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 35,
+                        child:
+                            Text(listadePalpites.elementAt(index).toString()),
+                      );
+                    }),
+              ),
             ),
           ),
           const Expanded(

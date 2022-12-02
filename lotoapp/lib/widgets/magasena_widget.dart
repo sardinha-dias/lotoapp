@@ -15,7 +15,6 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
 
   var numbers = Set<int>();
   var listadePalpites = Set<List>();
-
   int length = 6;
   int max = 60;
   int min = 1;
@@ -80,29 +79,24 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.grey.shade400,
       appBar: AppBar(),
       body: Container(
         decoration: BoxDecoration(
-          //  color: const Color(0xff7c94b6),
           image: DecorationImage(
             image: const AssetImage("assets/back_menu.jpg"),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                Colors.black.withOpacity(0.2), BlendMode.dstATop),
             //    opacity: 1.0
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 60,
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 150,
+                height: 100,
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
@@ -132,7 +126,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 200,
+                height: 100,
                 child: Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
@@ -146,88 +140,76 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(18.0), // <-- Radius
-                                ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
                               ),
-                              onPressed: _decrementa,
-                              child: const Icon(Icons.remove),
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              '$length',
-                              style: const TextStyle(
-                                  fontSize: 28, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(18.0), // <-- Radius
-                                ),
-                              ),
-                              onPressed: _incrementa,
-                              child: const Icon(Icons.add),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(18.0), // <-- Radius
+                            onPressed: _decrementa,
+                            child: const Icon(Icons.remove),
                           ),
-                        ),
-                        onPressed: _gera,
-                        child: const Text(
-                          'Gerar Números',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '$length',
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _incrementa,
+                            child: const Icon(Icons.add),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
             ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
+                ),
+              ),
+              onPressed: _gera,
+              child: const Text(
+                'Gerar Números',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
             const SizedBox(
               height: 5,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
+            Flexible(
+              flex: 2,
+              child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.transparent,
-                  border: Border.all(color: Colors.black, width: 2.0),
-                ),
-                child: SizedBox(
-                  height: 100,
-                  width: double.infinity,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 2.0),
+                  ),
                   child: Scrollbar(
                     thumbVisibility: true,
                     controller: _firstController,
@@ -235,8 +217,8 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                         controller: _firstController,
                         itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: 30,
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                                 listadePalpites.elementAt(index).toString()),
                           );
@@ -245,31 +227,27 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                 ),
               ),
             ),
-            const Expanded(
-              flex: 3,
-              child: SizedBox(
-                height: 50,
-              ),
-            ),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0), // <-- Radius
-                  ),
-                ),
-                child: const Text(
-                  'Voltar',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            label: 'Salvar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: 'Sorte',
+          ),
+        ],
+        // currentIndex: _selectedIndex,
+        //   selectedItemColor: Colors.amber[800],
+        //   onTap: _onItemTapped,
       ),
     );
   }

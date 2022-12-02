@@ -40,126 +40,94 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
     return Scaffold(
       //  backgroundColor: Colors.blueGrey,
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: SizedBox(
-              height: 220,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18.0),
-                    color: Colors.transparent,
-                    border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
-                        style: BorderStyle.solid)),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Center(
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 10,
-                        ),
-                        itemCount: listnumbers.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return BolasSorteadas(
-                            sequencia: listnumbers.elementAt(index),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: const AssetImage("assets/back_menu.jpg"),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.2), BlendMode.dstATop),
+            //    opacity: 1.0
           ),
-          /*  Padding(
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 100,
+                height: 210,
                 child: Container(
-                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
                       border: Border.all(color: Colors.black, width: 1.0)),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Quantidade de números',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        '$length',
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                    ],
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 10,
+                    ),
+                    itemCount: listnumbers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return BolasSorteadas(
+                        sequencia: listnumbers.elementAt(index),
+                      );
+                    },
                   ),
                 ),
-              )),
-              */
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0), // <-- Radius
               ),
             ),
-            onPressed: _gera,
-            child: const Text(
-              'Gerar Números',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Flexible(
-            flex: 2,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.0),
-                color: Colors.transparent,
-                border: Border.all(color: Colors.black, width: 1.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0), // <-- Radius
+                ),
               ),
-              // child: SizedBox(
-              //  height: 100,
-              //  width: double.infinity,
-              child: Scrollbar(
-                thumbVisibility: true,
-                controller: _firstController,
-                child: ListView.builder(
+              onPressed: _gera,
+              child: const Text(
+                'Gerar Números',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 1.0),
+                  ),
+                  child: Scrollbar(
+                    thumbVisibility: true,
                     controller: _firstController,
-                    itemCount: listadePalpites.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 70,
-                        child: Text(
-                          listadePalpites.elementAt(index).toString(),
-                        ),
-                      );
-                    }),
+                    child: ListView.builder(
+                        controller: _firstController,
+                        itemCount: listadePalpites.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 70,
+                            child: Text(
+                              listadePalpites.elementAt(index).toString(),
+                            ),
+                          );
+                        }),
+                  ),
+                ),
               ),
             ),
-          ),
-          //    ),
-        ],
+            //    ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

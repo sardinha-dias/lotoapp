@@ -24,11 +24,12 @@ class MainMenuWidget extends StatelessWidget {
             SizedBox(
               height: 150,
             ),
-            Text('escolha uma das modalidades Abaixo para gerar os números',
+            /*   Text('escolha uma das modalidades Abaixo para gerar os números',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
-                    color: Colors.white)),
+                   color: Colors.black)),
+                   */
             SizedBox(
               height: 15,
             ),

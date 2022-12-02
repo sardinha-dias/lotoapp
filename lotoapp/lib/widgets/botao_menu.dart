@@ -51,13 +51,14 @@ class BotaoMenu extends StatelessWidget {
                 width: 30,
               ),
               Center(
-                child: Text(
-                  jogo,
-                  style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white),
-                ),
+                child: Text(jogo,
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                          letterSpacing: 10,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
               ),
             ],
           ),

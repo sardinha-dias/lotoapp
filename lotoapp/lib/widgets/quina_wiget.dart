@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:lotoapp/widgets/main_menu_widget.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -12,6 +13,7 @@ class QuinaWidget extends StatefulWidget {
 }
 
 class _QuinaWidgetState extends State<QuinaWidget> {
+  int _selectedIndex = 0;
   final ScrollController _firstController = ScrollController();
 
   var numbers = Set<int>();
@@ -61,7 +63,6 @@ class _QuinaWidgetState extends State<QuinaWidget> {
       if (length > 5) {
         length--;
         tamanho = length;
-
         listnumbers = List<int>.filled(tamanho, 0, growable: true);
       } else {
         Fluttertoast.showToast(
@@ -76,29 +77,66 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     });
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+
+      /*  Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_selectedIndex) => _selectedIndex == 0
+           ? MainMenuWidget()
+           : _selectedIndex == 1 
+           ?  showModal(context)
+        ),
+      ); */
+    });
+  }
+
+  void showModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: const Text('Example Dialog'),
+        actions: <TextButton>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Close'),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      //  backgroundColor: Colors.cyan.shade100,
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          //const SizedBox(
-          //    height: 10,
-          //  ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 100,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18.0),
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.black, width: 2.0)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: const AssetImage("assets/back_menu.jpg"),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.2), BlendMode.dstATop),
+            //    opacity: 1.0
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 100,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.0),
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.black, width: 2.0)),
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -114,143 +152,116 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 100,
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.0),
-                  color: Colors.transparent,
-                  border: Border.all(color: Colors.black, width: 2.0),
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      'Quantidade de números',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(18.0), // <-- Radius
-                            ),
-                          ),
-                          onPressed: _decrementa,
-                          child: const Icon(Icons.remove),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          '$length',
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(18.0), // <-- Radius
-                            ),
-                          ),
-                          onPressed: _incrementa,
-                          child: const Icon(Icons.add),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            const SizedBox(
+              height: 5,
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0), // <-- Radius
-              ),
-            ),
-            onPressed: _gera,
-            child: const Text(
-              'Gerar Números',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-
-          const SizedBox(
-            height: 5,
-          ),
-
-          Flexible(
-            flex: 2,
-            child: Container(
+            Padding(
               padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.0),
-                color: Colors.transparent,
-                border: Border.all(color: Colors.black, width: 2.0),
-              ),
-              // child: SizedBox(
-              //    height: 100,
-              //    width: double.infinity,
-              child: Scrollbar(
-                thumbVisibility: true,
-                controller: _firstController,
-                child: ListView.builder(
-                    controller: _firstController,
-                    itemCount: listadePalpites.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                            Text(listadePalpites.elementAt(index).toString()),
-                      );
-                    }),
+              child: SizedBox(
+                height: 100,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 2.0),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Quantidade de números',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _decrementa,
+                            child: const Icon(Icons.remove),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '$length',
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(18.0), // <-- Radius
+                              ),
+                            ),
+                            onPressed: _incrementa,
+                            child: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          // ),
-
-          //  const SizedBox(
-          //    height: 50,
-          ///   ),
-          //    const Expanded(
-          //      flex: 3,
-          //       child: SizedBox(
-          //         height: 50,
-          //         ),
-          //         ),
-          /*   Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0), // <-- Radius
                 ),
               ),
-              child: const Text('Voltar'),
+              onPressed: _gera,
+              child: const Text(
+                'Gerar Números',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),*/
-        ],
+            const SizedBox(
+              height: 5,
+            ),
+            Flexible(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 2.0),
+                  ),
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: _firstController,
+                    child: ListView.builder(
+                        controller: _firstController,
+                        itemCount: listadePalpites.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                listadePalpites.elementAt(index).toString()),
+                          );
+                        }),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -267,9 +278,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
             label: 'Sorte',
           ),
         ],
-        // currentIndex: _selectedIndex,
-        //   selectedItemColor: Colors.amber[800],
-        //   onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
       //  );
     );

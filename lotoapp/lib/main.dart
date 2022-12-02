@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.grey.shade200),
-      home: MainMenuWidget(),
+      home: const MainMenuWidget(),
     );
   }
 }

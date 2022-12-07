@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:lotoapp/widgets/gerar_numeros.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
@@ -16,8 +17,8 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   int _selectedIndex = 0;
   final ScrollController _firstController = ScrollController();
 
-  var numbers = Set<int>();
-  var listadePalpites = Set<List>();
+  var numbers = <int>{};
+  var listadePalpites = <List>{};
   int length = 5;
   int max = 80;
   int min = 1;
@@ -26,10 +27,9 @@ class _QuinaWidgetState extends State<QuinaWidget> {
 
   void _gera() {
     setState(() {
-      int nextNumber({required int max, required int min}) =>
-          min + Random().nextInt(max - min + 1);
+      int nextNumber({required int max}) => 1 + Random().nextInt(max);
       while (numbers.length < length) {
-        final number = nextNumber(max: max, min: min);
+        final number = nextNumber(max: max);
         numbers.add(number);
       }
       listnumbers = numbers.toList();
@@ -80,34 +80,44 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
-      /*  Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_selectedIndex) => _selectedIndex == 0
-           ? MainMenuWidget()
-           : _selectedIndex == 1 
-           ?  showModal(context)
-        ),
-      ); */
+      index == 0
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MainMenuWidget())) //  showModal(context)
+          : index == 1
+              ?
+              //    void showModal(BuildContext context) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Example Dialog'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Exertetedfdfsdfsdfg'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                );
     });
-  }
-
-  void showModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: const Text('Example Dialog'),
-        actions: <TextButton>[
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
-          )
-        ],
-      ),
-    );
   }
 
   @override
@@ -250,11 +260,13 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                         controller: _firstController,
                         itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                listadePalpites.elementAt(index).toString()),
+                          return BolasGeradas(
+                            sequenciaDeBolas: listadePalpites.elementAt(index),
                           );
+
+                          //  Text(
+                          //  listadePalpites.elementAt(index).toString()),
+                          //   );
                         }),
                   ),
                 ),

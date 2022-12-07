@@ -26,3 +26,25 @@ class BolasSorteadas extends StatelessWidget {
     );
   }
 }
+
+class BolasGeradas extends StatelessWidget {
+  final List? sequenciaDeBolas;
+
+  const BolasGeradas({
+    super.key,
+    this.sequenciaDeBolas,
+  });
+  final double imageRadius = 50;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          sequenciaDeBolas.toString(),
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
+    );
+  }
+}

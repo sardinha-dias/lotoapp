@@ -18,7 +18,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
   int length = 6;
   int max = 60;
   int min = 1;
-  int tamanho = 6;
+  // int tamanho = 6;
 
   List<int> listnumbers = List<int>.filled(6, 0, growable: true);
 
@@ -42,8 +42,8 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length < 15) {
         length++;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        //  tamanho = length;
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O número máximo de números para apostar é 15",
@@ -61,8 +61,8 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length > 6) {
         length--;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        //   tamanho = length;
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O número mínimo de números para apostar é 6",
@@ -109,7 +109,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 10,
                       ),
-                      itemCount: tamanho,
+                      itemCount: length,
                       itemBuilder: (BuildContext context, int index) {
                         return BolasSorteadas(
                           sequencia: listnumbers.elementAt(index),

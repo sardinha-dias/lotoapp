@@ -50,17 +50,17 @@ class MainMenuWidget extends StatelessWidget {
               height: 10,
             ),
             BotaoMenu(
-              jogo: 'Lotomania',
-              logo: 'assets/logo-lotomania.png',
-              passar: 'lotomania',
+              jogo: 'Lotofácil',
+              logo: 'assets/logo-lotofacil.png',
+              passar: 'lotofacil',
             ),
             SizedBox(
               height: 10,
             ),
             BotaoMenu(
-              jogo: 'Lotofácio',
-              logo: 'assets/logo-lotofacil.png',
-              passar: 'lotofacil',
+              jogo: 'Lotomania',
+              logo: 'assets/logo-lotomania.png',
+              passar: 'lotomania',
             ),
           ],
         ),

@@ -42,7 +42,10 @@ class BolasGeradas extends StatelessWidget {
         title: Text(
           sequenciaDeBolas.toString(),
           style: const TextStyle(
-              fontWeight: FontWeight.normal, color: Colors.black),
+              wordSpacing: 4.0,
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+              color: Colors.black),
         ),
       ),
     );

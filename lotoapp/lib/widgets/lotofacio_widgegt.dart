@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../style/bolas_sorteadas.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'main_menu_widget.dart';
+
 class LotofacioWidget extends StatefulWidget {
   const LotofacioWidget({Key? key}) : super(key: key);
 
@@ -11,23 +13,21 @@ class LotofacioWidget extends StatefulWidget {
 }
 
 class _LotofacioWidgetState extends State<LotofacioWidget> {
-  final ScrollController _firstController = ScrollController();
-  var numbers = Set<int>();
-  var listadePalpites = Set<List>();
+  int _selectedIndex = 0;
 
+  final ScrollController _firstController = ScrollController();
+  var numbers = <int>{};
+  var listadePalpites = <List>{};
   int length = 15;
   int max = 25;
-  int min = 1;
-  int tamanho = 15;
 
   List<int> listnumbers = List<int>.filled(15, 0, growable: true);
 
   void _gera() {
     setState(() {
-      int nextNumber({required int max, required int min}) =>
-          min + Random().nextInt(max - min + 1);
+      int nextNumber({required int max}) => 1 + Random().nextInt(max);
       while (numbers.length < length) {
-        final number = nextNumber(max: max, min: min);
+        final number = nextNumber(max: max);
         numbers.add(number);
       }
       listnumbers = numbers.toList();
@@ -42,8 +42,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
     setState(() {
       if (length < 20) {
         length++;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O quantidade máximo de números para apostar é 20",
@@ -61,8 +60,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
     setState(() {
       if (length > 15) {
         length--;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O quantidade mínima de números para apostar é 15",
@@ -73,6 +71,49 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      index == 0
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MainMenuWidget())) //  showModal(context)
+          : index == 1
+              ?
+              //    void showModal(BuildContext context) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Example Dialog'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Exertetedfdfsdfsdfg'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                );
     });
   }
 
@@ -108,7 +149,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 10,
                       ),
-                      itemCount: tamanho,
+                      itemCount: length,
                       itemBuilder: (BuildContext context, int index) {
                         return BolasSorteadas(
                           sequencia: listnumbers.elementAt(index),
@@ -138,10 +179,10 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                       const Text(
                         'Quantidade de números',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -154,16 +195,10 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                             onPressed: _decrementa,
                             child: const Icon(Icons.remove),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
                           Text(
                             '$length',
                             style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            width: 20,
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -193,7 +228,7 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
               onPressed: _gera,
               child: const Text(
                 'Gerar Números',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -217,10 +252,8 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
                         controller: _firstController,
                         itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                listadePalpites.elementAt(index).toString()),
+                          return BolasGeradas(
+                            sequenciaDeBolas: listadePalpites.elementAt(index),
                           );
                         }),
                   ),
@@ -245,9 +278,9 @@ class _LotofacioWidgetState extends State<LotofacioWidget> {
             label: 'Sorte',
           ),
         ],
-        // currentIndex: _selectedIndex,
-        //   selectedItemColor: Colors.amber[800],
-        //   onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

@@ -40,16 +40,11 @@ class BotaoMenu extends StatelessWidget {
         color: Colors.transparent,
         child: SizedBox(
           height: 50,
-          width: 400,
+          width: double.infinity,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(
-                width: 30,
-              ),
               Image.asset(logo),
-              const SizedBox(
-                width: 30,
-              ),
               Center(
                 child: Text(jogo,
                     style: GoogleFonts.roboto(

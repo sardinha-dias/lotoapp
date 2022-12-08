@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../style/bolas_sorteadas.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'main_menu_widget.dart';
+
 class MegaSenaWidget extends StatefulWidget {
   const MegaSenaWidget({Key? key}) : super(key: key);
 
@@ -11,23 +13,22 @@ class MegaSenaWidget extends StatefulWidget {
 }
 
 class _MegaSenaWidgetState extends State<MegaSenaWidget> {
+  int _selectedIndex = 0;
+
   final ScrollController _firstController = ScrollController();
 
-  var numbers = Set<int>();
-  var listadePalpites = Set<List>();
+  var numbers = <int>{};
+  var listadePalpites = <List>{};
   int length = 6;
   int max = 60;
-  int min = 1;
-  // int tamanho = 6;
 
   List<int> listnumbers = List<int>.filled(6, 0, growable: true);
 
   void _gera() {
     setState(() {
-      int nextNumber({required int max, required int min}) =>
-          min + Random().nextInt(max - min + 1);
+      int nextNumber({required int max}) => 1 + Random().nextInt(max);
       while (numbers.length < length) {
-        final number = nextNumber(max: max, min: min);
+        final number = nextNumber(max: max);
         numbers.add(number);
       }
       listnumbers = numbers.toList();
@@ -42,7 +43,6 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length < 15) {
         length++;
-        //  tamanho = length;
         listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
@@ -61,7 +61,6 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
     setState(() {
       if (length > 6) {
         length--;
-        //   tamanho = length;
         listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
@@ -73,6 +72,49 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      index == 0
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MainMenuWidget())) //  showModal(context)
+          : index == 1
+              ?
+              //    void showModal(BuildContext context) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Example Dialog'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Exertetedfdfsdfsdfg'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                );
     });
   }
 
@@ -130,18 +172,19 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                 child: Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.0),
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.black, width: 2.0)),
+                    borderRadius: BorderRadius.circular(18.0),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.black, width: 2.0),
+                  ),
                   child: Column(
                     children: [
                       const Text(
                         'Quantidade de números',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -154,16 +197,10 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                             onPressed: _decrementa,
                             child: const Icon(Icons.remove),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
                           Text(
                             '$length',
                             style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            width: 20,
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -193,7 +230,7 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
               onPressed: _gera,
               child: const Text(
                 'Gerar Números',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -217,11 +254,9 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
                         controller: _firstController,
                         itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                                listadePalpites.elementAt(index).toString()),
-                          );
+                          return BolasGeradas(
+                              sequenciaDeBolas:
+                                  listadePalpites.elementAt(index));
                         }),
                   ),
                 ),
@@ -245,9 +280,9 @@ class _MegaSenaWidgetState extends State<MegaSenaWidget> {
             label: 'Sorte',
           ),
         ],
-        // currentIndex: _selectedIndex,
-        //   selectedItemColor: Colors.amber[800],
-        //   onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

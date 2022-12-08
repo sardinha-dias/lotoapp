@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lotoapp/widgets/gerar_numeros.dart';
+//import 'package:lotoapp/widgets/gerar_numeros.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
@@ -21,8 +21,6 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   var listadePalpites = <List>{};
   int length = 5;
   int max = 80;
-  int min = 1;
-  int tamanho = 5;
   List<int> listnumbers = List<int>.filled(5, 0, growable: true);
 
   void _gera() {
@@ -43,8 +41,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     setState(() {
       if (length < 15) {
         length++;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O quantidade máximo de números para apostar é 15",
@@ -62,8 +59,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
     setState(() {
       if (length > 5) {
         length--;
-        tamanho = length;
-        listnumbers = List<int>.filled(tamanho, 0, growable: true);
+        listnumbers = List<int>.filled(length, 0, growable: true);
       } else {
         Fluttertoast.showToast(
             msg: "O quantidade mínima de números para apostar é 5",
@@ -177,14 +173,15 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                     border: Border.all(color: Colors.black, width: 2.0),
                   ),
                   child: Column(
+                    //  mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Text(
                         'Quantidade de números',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -197,16 +194,10 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                             onPressed: _decrementa,
                             child: const Icon(Icons.remove),
                           ),
-                          const SizedBox(
-                            width: 20,
-                          ),
                           Text(
                             '$length',
                             style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            width: 20,
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -236,7 +227,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
               onPressed: _gera,
               child: const Text(
                 'Gerar Números',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -263,10 +254,6 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                           return BolasGeradas(
                             sequenciaDeBolas: listadePalpites.elementAt(index),
                           );
-
-                          //  Text(
-                          //  listadePalpites.elementAt(index).toString()),
-                          //   );
                         }),
                   ),
                 ),

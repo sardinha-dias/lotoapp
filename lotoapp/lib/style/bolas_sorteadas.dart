@@ -41,8 +41,8 @@ class BolasGeradas extends StatelessWidget {
       child: ListTile(
         title: Text(
           sequenciaDeBolas.toString(),
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: const TextStyle(
+              fontWeight: FontWeight.normal, color: Colors.black),
         ),
       ),
     );

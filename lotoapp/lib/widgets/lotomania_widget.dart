@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../style/bolas_sorteadas.dart';
+import 'main_menu_widget.dart';
 
 class LotomaniaWidget extends StatefulWidget {
   const LotomaniaWidget({Key? key}) : super(key: key);
@@ -10,21 +11,22 @@ class LotomaniaWidget extends StatefulWidget {
 }
 
 class _LotomaniaWidgetState extends State<LotomaniaWidget> {
-  final ScrollController _firstController = ScrollController();
-  var numbers = Set<int>();
-  var listadePalpites = Set<List>();
+  int _selectedIndex = 0;
 
+  final ScrollController _firstController = ScrollController();
+  var numbers = <int>{};
+  var listadePalpites = <List>{};
   int length = 50;
   int max = 100;
-  int min = 1;
   List<int> listnumbers = List<int>.filled(50, 0, growable: true);
 
   void _gera() {
     setState(() {
-      int nextNumber({required int max, required int min}) =>
-          min + Random().nextInt(max - min + 1);
+      int nextNumber({required int max}) => 1 + Random().nextInt(max);
       while (numbers.length < length) {
-        final number = nextNumber(max: max, min: min);
+        final number = nextNumber(
+          max: max,
+        );
         numbers.add(number);
       }
       listnumbers = numbers.toList();
@@ -32,6 +34,49 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
       listadePalpites.add(listnumbers);
 
       numbers.clear();
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      index == 0
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MainMenuWidget())) //  showModal(context)
+          : index == 1
+              ?
+              //    void showModal(BuildContext context) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Example Dialog'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Exertetedfdfsdfsdfg'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                );
     });
   }
 
@@ -90,10 +135,10 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
               onPressed: _gera,
               child: const Text(
                 'Gerar Números',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Flexible(
@@ -114,11 +159,8 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
                         controller: _firstController,
                         itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: 70,
-                            child: Text(
-                              listadePalpites.elementAt(index).toString(),
-                            ),
+                          return BolasGeradas(
+                            sequenciaDeBolas: listadePalpites.elementAt(index),
                           );
                         }),
                   ),
@@ -144,9 +186,9 @@ class _LotomaniaWidgetState extends State<LotomaniaWidget> {
             label: 'Sorte',
           ),
         ],
-        // currentIndex: _selectedIndex,
-        //   selectedItemColor: Colors.amber[800],
-        //   onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

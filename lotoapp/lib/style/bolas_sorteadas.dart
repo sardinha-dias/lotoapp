@@ -34,7 +34,6 @@ class BolasGeradas extends StatelessWidget {
     super.key,
     this.sequenciaDeBolas,
   });
-  final double imageRadius = 50;
   @override
   Widget build(BuildContext context) {
     return Card(

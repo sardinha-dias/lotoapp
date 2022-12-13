@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:lotoapp/widgets/jogos_salvos.dart';
 //import 'package:lotoapp/widgets/gerar_numeros.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -14,14 +16,61 @@ class QuinaWidget extends StatefulWidget {
 }
 
 class _QuinaWidgetState extends State<QuinaWidget> {
+  late final Box box;
   int _selectedIndex = 0;
   final ScrollController _firstController = ScrollController();
-
+  List<dynamic> salvo = [];
   var numbers = <int>{};
-  var listadePalpites = <List>{};
+  List<dynamic> listadePalpites = [];
   int length = 5;
   int max = 80;
   List<int> listnumbers = List<int>.filled(5, 0, growable: true);
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box('jogosSalvos');
+  }
+
+  //@override
+  //void dispose() {
+  //  Hive.close();
+  //   super.dispose();
+//  }
+
+  _addJogos() async {
+    for (int i = 0; i < listadePalpites.length; i++) {
+      //  box.deleteAt(i);
+      box.add(listadePalpites[i]);
+      print(box.length);
+    }
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        content: const Text(
+            'Números Sálvos com Sucesso!     Click no icone no canto superior direito para recuperar os jogos salvos.'),
+        actions: <TextButton>[
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Fechar'),
+          )
+        ],
+      ),
+    );
+  }
+
+  _getJogos() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => JogosSalvos()));
+
+    //  for (int i = 0; i < box.length; i++) {
+    //   salvo.add(box.getAt(i));
+    //  }
+    //  print('Info retrived from box: $salvo ');
+    // print(box.length);
+  }
 
   void _gera() {
     setState(() {
@@ -83,22 +132,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                   builder: (context) =>
                       const MainMenuWidget())) //  showModal(context)
           : index == 1
-              ?
-              //    void showModal(BuildContext context) {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    content: const Text('Example Dialog'),
-                    actions: <TextButton>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Close'),
-                      )
-                    ],
-                  ),
-                )
+              ? _addJogos()
               : showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
@@ -120,7 +154,15 @@ class _QuinaWidgetState extends State<QuinaWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: _getJogos,
+            icon: const Icon(Icons.format_list_numbered_sharp),
+            tooltip: 'Jogos Salvos',
+          ),
+        ],
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

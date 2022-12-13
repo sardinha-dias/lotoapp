@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+//import 'package:hive/hive.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('JogosSalvos');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
           primary: Color.fromARGB(144, 188, 185, 185),

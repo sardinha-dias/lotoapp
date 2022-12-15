@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:lotoapp/widgets/main_menu_widget.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lotoapp/widgets/numeros_aleatorios.dart';
+import 'package:lotoapp/widgets/quina_wiget.dart';
+import 'package:provider/provider.dart';
 //import 'package:hive/hive.dart';
 
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('JogosSalvos');
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => NumerosAleatorios(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.grey.shade200,
       ),
-      home: const MainMenuWidget(),
+      home: ChangeNotifierProvider<NumerosAleatorios>(
+          create: (BuildContext context) => NumerosAleatorios(),
+          child: MainMenuWidget()),
     );
   }
 }

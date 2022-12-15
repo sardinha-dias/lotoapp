@@ -22,7 +22,7 @@ class BotaoMenu extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => passar == 'quina'
-                  ? const QuinaWidget()
+                  ? QuinaWidget()
                   : passar == 'lotofacil'
                       ? const LotofacioWidget()
                       : passar == 'megasena'

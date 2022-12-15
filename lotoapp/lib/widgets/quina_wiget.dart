@@ -1,163 +1,30 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:lotoapp/widgets/jogos_salvos.dart';
+//import 'package:hive/hive.dart';
+//import 'package:lotoapp/widgets/jogos_salvos.dart';
 //import 'package:lotoapp/widgets/gerar_numeros.dart';
-import 'package:lotoapp/widgets/main_menu_widget.dart';
+//import 'package:lotoapp/widgets/main_menu_widget.dart';
+import 'package:provider/provider.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lotoapp/widgets/numeros_aleatorios.dart';
 
-class QuinaWidget extends StatefulWidget {
-  const QuinaWidget({Key? key}) : super(key: key);
-
-  @override
-  State<QuinaWidget> createState() => _QuinaWidgetState();
-}
-
-class _QuinaWidgetState extends State<QuinaWidget> {
-  late final Box box;
-  int _selectedIndex = 0;
+class QuinaWidget extends StatelessWidget {
+  QuinaWidget({Key? key}) : super(key: key);
   final ScrollController _firstController = ScrollController();
-  List<dynamic> salvo = [];
-  var numbers = <int>{};
-  List<dynamic> listadePalpites = [];
-  int length = 5;
-  int max = 80;
-  List<int> listnumbers = List<int>.filled(5, 0, growable: true);
 
-  @override
-  void initState() {
-    super.initState();
-    box = Hive.box('jogosSalvos');
-  }
-
-  //@override
-  //void dispose() {
-  //  Hive.close();
-  //   super.dispose();
-//  }
-
-  _addJogos() async {
-    for (int i = 0; i < listadePalpites.length; i++) {
-      //  box.deleteAt(i);
-      box.add(listadePalpites[i]);
-      print(box.length);
-    }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        content: const Text(
-            'Números Sálvos com Sucesso!     Click no icone no canto superior direito para recuperar os jogos salvos.'),
-        actions: <TextButton>[
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Fechar'),
-          )
-        ],
-      ),
-    );
-  }
-
-  _getJogos() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => JogosSalvos()));
-
-    //  for (int i = 0; i < box.length; i++) {
-    //   salvo.add(box.getAt(i));
-    //  }
-    //  print('Info retrived from box: $salvo ');
-    // print(box.length);
-  }
-
-  void _gera() {
-    setState(() {
-      int nextNumber({required int max}) => 1 + Random().nextInt(max);
-      while (numbers.length < length) {
-        final number = nextNumber(max: max);
-        numbers.add(number);
-      }
-      listnumbers = numbers.toList();
-      listnumbers.sort();
-      listadePalpites.add(listnumbers);
-      numbers.clear();
-    });
-  }
-
-  void _incrementa() {
-    setState(() {
-      if (length < 15) {
-        length++;
-        listnumbers = List<int>.filled(length, 0, growable: true);
-      } else {
-        Fluttertoast.showToast(
-            msg: "O quantidade máximo de números para apostar é 15",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-    });
-  }
-
-  void _decrementa() {
-    setState(() {
-      if (length > 5) {
-        length--;
-        listnumbers = List<int>.filled(length, 0, growable: true);
-      } else {
-        Fluttertoast.showToast(
-            msg: "O quantidade mínima de números para apostar é 5",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      }
-    });
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      index == 0
-          ? Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const MainMenuWidget())) //  showModal(context)
-          : index == 1
-              ? _addJogos()
-              : showDialog(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    content: const Text('Exertetedfdfsdfsdfg'),
-                    actions: <TextButton>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Close'),
-                      )
-                    ],
-                  ),
-                );
-    });
-  }
-
+//  late final Box box;
   @override
   Widget build(BuildContext context) {
+    print('build');
+    final contador = Provider.of<NumerosAleatorios>(context);
+    // final numeroDeBolas = Provider.of<NumerosAleatorios>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: _getJogos,
+            onPressed: (() {}),
             icon: const Icon(Icons.format_list_numbered_sharp),
             tooltip: 'Jogos Salvos',
           ),
@@ -190,10 +57,10 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 10,
                     ),
-                    itemCount: listnumbers.length,
+                    itemCount: contador.listnumbers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return BolasSorteadas(
-                        sequencia: listnumbers.elementAt(index),
+                        sequencia: contador.listnumbers.elementAt(index),
                       );
                     },
                   ),
@@ -233,11 +100,11 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                                     BorderRadius.circular(18.0), // <-- Radius
                               ),
                             ),
-                            onPressed: _decrementa,
+                            onPressed: contador.decrementa,
                             child: const Icon(Icons.remove),
                           ),
                           Text(
-                            '$length',
+                            contador.listnumbers.length.toString(),
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -249,7 +116,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                                     BorderRadius.circular(18.0), // <-- Radius
                               ),
                             ),
-                            onPressed: _incrementa,
+                            onPressed: contador.incrementa,
                             child: const Icon(Icons.add),
                           ),
                         ],
@@ -266,7 +133,7 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                   borderRadius: BorderRadius.circular(18.0), // <-- Radius
                 ),
               ),
-              onPressed: _gera,
+              onPressed: contador.gera,
               child: const Text(
                 'Gerar Números',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -291,10 +158,11 @@ class _QuinaWidgetState extends State<QuinaWidget> {
                     controller: _firstController,
                     child: ListView.builder(
                         controller: _firstController,
-                        itemCount: listadePalpites.length,
+                        itemCount: contador.listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
                           return BolasGeradas(
-                            sequenciaDeBolas: listadePalpites.elementAt(index),
+                            sequenciaDeBolas:
+                                contador.listadePalpites.elementAt(index),
                           );
                         }),
                   ),
@@ -304,25 +172,25 @@ class _QuinaWidgetState extends State<QuinaWidget> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.save),
-            label: 'Salvar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.money),
-            label: 'Sorte',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.save),
+      //       label: 'Salvar',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.money),
+      //       label: 'Sorte',
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   selectedItemColor: Colors.amber[800],
+      //   onTap: _onItemTapped,
+      // ),
       //  );
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'lotofacil_widget.dart';
 import 'megasena_widget.dart';
 import 'quina_widget.dart';
@@ -46,15 +46,16 @@ class BotaoMenu extends StatelessWidget {
             children: [
               Image.asset(logo),
               Center(
-                child: Text(jogo,
-                    style: GoogleFonts.roboto(
-                      textStyle: const TextStyle(
-                          letterSpacing: 10,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )),
-              ),
+                  child: Text(
+                jogo,
+                // style: GoogleFonts.roboto(
+                //  textStyle: const TextStyle(
+                //      letterSpacing: 10,
+                //      fontSize: 25,
+                //       fontWeight: FontWeight.bold,
+                //       color: Colors.white),
+              )),
+              // ),
             ],
           ),
         ),

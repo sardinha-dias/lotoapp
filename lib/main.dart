@@ -12,7 +12,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => NumerosAleatorios(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider<NumerosAleatorios>(
           create: (BuildContext context) => NumerosAleatorios(),
-          child: MainMenuWidget()),
+          child: const MainMenuWidget()),
     );
   }
 }

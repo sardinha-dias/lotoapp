@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lotoapp/widgets/quina_widget.dart';
 
 import '../style/bolas_sorteadas.dart';
-import 'main_menu_widget.dart';
 
 class JogosSalvos extends StatefulWidget {
   const JogosSalvos({super.key});
@@ -109,7 +107,7 @@ class _JogosSalvosState extends State<JogosSalvos> {
         children: [
           ElevatedButton(
             onPressed: _deletaJogos,
-            child: Text('Apagar Jogos'),
+            child: const Text('Apagar Jogos'),
           ),
           Expanded(
             flex: 2,

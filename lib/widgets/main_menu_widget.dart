@@ -19,8 +19,8 @@ class MainMenuWidget extends StatelessWidget {
             //    opacity: 1.0
           ),
         ),
-        child: Column(
-          children: const [
+        child: const Column(
+          children: [
             SizedBox(
               height: 150,
             ),

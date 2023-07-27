@@ -10,10 +10,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('JogosSalvos');
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => NumerosAleatorios(),
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
@@ -23,17 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: const ColorScheme.light(
-          primary: Color.fromARGB(144, 188, 185, 185),
-          // primarySwatch: Colors.amber,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: const ColorScheme.light(
+            primary: Color.fromARGB(144, 188, 185, 185),
+            // primarySwatch: Colors.amber,
+          ),
+          scaffoldBackgroundColor: Colors.grey.shade200,
         ),
-        scaffoldBackgroundColor: Colors.grey.shade200,
-      ),
-      home: ChangeNotifierProvider<NumerosAleatorios>(
-          create: (BuildContext context) => NumerosAleatorios(),
-          child: const MainMenuWidget()),
-    );
+        home: const MainMenuWidget());
   }
 }

@@ -1,35 +1,127 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-//import 'package:hive/hive.dart';
-//import 'package:lotoapp/widgets/jogos_salvos.dart';
-//import 'package:lotoapp/widgets/gerar_numeros.dart';
-//import 'package:lotoapp/widgets/main_menu_widget.dart';
-import 'package:provider/provider.dart';
-//import 'package:google_fonts/google_fonts.dart';
 import '../style/bolas_sorteadas.dart';
-//import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lotoapp/widgets/numeros_aleatorios.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class QuinaWidget extends StatelessWidget {
-  QuinaWidget({Key? key}) : super(key: key);
+import 'main_menu_widget.dart';
+
+class QuinaWidget extends StatefulWidget {
+  const QuinaWidget({Key? key}) : super(key: key);
+
+  @override
+  State<QuinaWidget> createState() => _QuinaWidgetState();
+}
+
+class _QuinaWidgetState extends State<QuinaWidget> {
+  int _selectedIndex = 0;
+
   final ScrollController _firstController = ScrollController();
 
-//  late final Box box;
+  var numbers = <int>{};
+  var listadePalpites = <List>{};
+  int length = 5;
+  int max = 80;
+
+  List<int> listnumbers = List<int>.filled(6, 0, growable: true);
+
+  void _gera() {
+    setState(() {
+      int nextNumber({required int max}) => 1 + Random().nextInt(max);
+      while (numbers.length < length) {
+        final number = nextNumber(max: max);
+        numbers.add(number);
+      }
+      listnumbers = numbers.toList();
+      listnumbers.sort();
+      listadePalpites.add(listnumbers);
+
+      numbers.clear();
+    });
+  }
+
+  void _incrementa() {
+    setState(() {
+      if (length < 15) {
+        length++;
+        listnumbers = List<int>.filled(length, 0, growable: true);
+      } else {
+        Fluttertoast.showToast(
+            msg: "O número máximo de números para apostar é 15",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    });
+  }
+
+  void _decrementa() {
+    setState(() {
+      if (length > 6) {
+        length--;
+        listnumbers = List<int>.filled(length, 0, growable: true);
+      } else {
+        Fluttertoast.showToast(
+            msg: "O número mínimo de números para apostar é 5",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      index == 0
+          ? Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MainMenuWidget())) //  showModal(context)
+          : index == 1
+              ?
+              //    void showModal(BuildContext context) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Example Dialog'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                )
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    content: const Text('Exertetedfdfsdfsdfg'),
+                    actions: <TextButton>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Close'),
+                      )
+                    ],
+                  ),
+                );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    print('build');
-    final contador = Provider.of<NumerosAleatorios>(context);
-    // final numeroDeBolas = Provider.of<NumerosAleatorios>(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: (() {}),
-            icon: const Icon(Icons.format_list_numbered_sharp),
-            tooltip: 'Jogos Salvos',
-          ),
-        ],
-      ),
+      appBar: AppBar(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -52,17 +144,20 @@ class QuinaWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(18.0),
                       color: Colors.transparent,
                       border: Border.all(color: Colors.black, width: 2.0)),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 10,
+                      ),
+                      itemCount: length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return BolasSorteadas(
+                          sequencia: listnumbers.elementAt(index),
+                        );
+                      },
                     ),
-                    itemCount: contador.listnumbers.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return BolasSorteadas(
-                        sequencia: contador.listnumbers.elementAt(index),
-                      );
-                    },
                   ),
                 ),
               ),
@@ -82,7 +177,6 @@ class QuinaWidget extends StatelessWidget {
                     border: Border.all(color: Colors.black, width: 2.0),
                   ),
                   child: Column(
-                    //  mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Text(
                         'Quantidade de números',
@@ -100,11 +194,11 @@ class QuinaWidget extends StatelessWidget {
                                     BorderRadius.circular(18.0), // <-- Radius
                               ),
                             ),
-                            onPressed: contador.decrementa,
+                            onPressed: _decrementa,
                             child: const Icon(Icons.remove),
                           ),
                           Text(
-                            contador.listnumbers.length.toString(),
+                            '$length',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -116,7 +210,7 @@ class QuinaWidget extends StatelessWidget {
                                     BorderRadius.circular(18.0), // <-- Radius
                               ),
                             ),
-                            onPressed: contador.incrementa,
+                            onPressed: _incrementa,
                             child: const Icon(Icons.add),
                           ),
                         ],
@@ -133,7 +227,7 @@ class QuinaWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18.0), // <-- Radius
                 ),
               ),
-              onPressed: contador.gera,
+              onPressed: _gera,
               child: const Text(
                 'Gerar Números',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -158,12 +252,11 @@ class QuinaWidget extends StatelessWidget {
                     controller: _firstController,
                     child: ListView.builder(
                         controller: _firstController,
-                        itemCount: contador.listadePalpites.length,
+                        itemCount: listadePalpites.length,
                         itemBuilder: (BuildContext context, int index) {
                           return BolasGeradas(
-                            sequenciaDeBolas:
-                                contador.listadePalpites.elementAt(index),
-                          );
+                              sequenciaDeBolas:
+                                  listadePalpites.elementAt(index));
                         }),
                   ),
                 ),
@@ -172,26 +265,25 @@ class QuinaWidget extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.save),
-      //       label: 'Salvar',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.money),
-      //       label: 'Sorte',
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   selectedItemColor: Colors.amber[800],
-      //   onTap: _onItemTapped,
-      // ),
-      //  );
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.save),
+            label: 'Salvar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money),
+            label: 'Sorte',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }

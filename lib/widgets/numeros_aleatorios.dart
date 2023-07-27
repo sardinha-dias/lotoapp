@@ -1,20 +1,27 @@
 import 'dart:math';
+import 'quina_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class NumerosAleatorios with ChangeNotifier {
+class NumerosAleatorios {
 // late final Box box;
 //  int _selectedIndex = 0;
   // final ScrollController _firstController = ScrollController();
-  List<dynamic> salvo = [];
+
+  // List<dynamic> salvo = [];
   var numbers = <int>{};
   List<dynamic> listadePalpites = [];
-  int length = 5;
-  int max = 80;
-  List<int> listnumbers = List<int>.filled(5, 0, growable: true);
+  late int length;
+  late int max;
+  late List<int> listnumbers;
+  // void setJogo(int quina, int maxquina) {
+  //   length = quina;
+  //  max = maxquina;
+  //   listnumbers = List<int>.filled(5, 0, growable: true);
+  // }
 
-  void gera() {
+  void gera(int max, int lenght, int nunbers) {
     int nextNumber({required int max}) => 1 + Random().nextInt(max);
     while (numbers.length < length) {
       final number = nextNumber(max: max);
@@ -22,17 +29,15 @@ class NumerosAleatorios with ChangeNotifier {
     }
     listnumbers = numbers.toList();
     listnumbers.sort();
-    listadePalpites.add(listnumbers);
-    numbers.clear();
-    notifyListeners();
+    //listadePalpites.add(listnumbers);
+    // numbers.clear();
+    // notifyListeners();
   }
 
   void incrementa() {
     if (length < 15) {
       length++;
       listnumbers = List<int>.filled(length, 0, growable: true);
-
-      notifyListeners();
     } else {
       Fluttertoast.showToast(
           msg: "O número máximo de números para apostar é 15",
@@ -49,7 +54,6 @@ class NumerosAleatorios with ChangeNotifier {
     if (length > 5) {
       length--;
       listnumbers = List<int>.filled(length, 0, growable: true);
-      notifyListeners();
     } else {
       Fluttertoast.showToast(
           msg: "O número mínimo de números para apostar é 5",
